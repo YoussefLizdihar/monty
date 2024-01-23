@@ -1,0 +1,22 @@
+#include "monty.h"
+
+stack_t *head = NULL;
+
+/**
+ * main - the main function
+ * @ac: args num
+ * @av: list of args
+ * Return: always 0
+ */
+
+int main(int ac, char *av[])
+{
+if (ac != 2)
+{
+fprintf(stderr, "USAGE: monty file\n");
+exit(EXIT_FAILURE);
+}
+executeing(av[1]);
+nFree();
+return (0);
+}

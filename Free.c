@@ -1,0 +1,33 @@
+#include "monty.h"
+
+/**
+ * nFree - Free nodes
+ */
+void nFree(void)
+{
+stack_t *tempvar;
+if (head == NULL)
+{
+return;
+}
+while (head != NULL)
+{
+tempvar = head;
+head = head->next;
+free(tempvar);
+tempvar = NULL;
+return;
+}
+}
+
+/**
+ * pFree - function that free string
+ * @c: pointer to string
+ */
+void pFree(char *c)
+{
+if (c == NULL)
+return;
+free(c);
+c = NULL;
+}

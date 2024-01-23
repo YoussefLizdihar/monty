@@ -1,0 +1,71 @@
+#include "monty.h"
+
+/**
+ * executeing - func that opens a file
+ * @fileName: the file namepath
+ * Return: void
+ */
+
+void executeing(char *fileName)
+{
+FILE *file = fopen(fileName, "r");
+if (fileName == NULL || file == NULL)
+fErr(2, fileName);
+rfile(file);
+fclose(file);
+}
+
+/**
+ * rfile - function that reads a file
+ * @file: address of the file
+ */
+
+void rfile(FILE *file)
+{
+int ln;
+int fmt = 0;
+size_t l = 0;
+char *buffer = NULL;
+for (ln = 1; getline(&buffer, &l, file) != -1; ln++)
+{
+fmt = analyser(buffer, ln, fmt);
+}
+pFree(buffer);
+}
+
+
+/**
+ * analyser - analyse lines to call (if) function
+ * @line: line to analyse
+ * @lnum: number of line
+ * @fmt: storage format 0 if Nodes enter as a stack
+ * 1 if as a queue
+ * Return: 0 if stack and 1 if queue
+ */
+
+int analyser(char *line, int lnum, int fmt)
+{
+char *oc;
+char *value;
+const char *dlm = "\n ";
+if (line == NULL)
+{
+fErr(4);
+}
+oc = strtok(line, dlm);
+if (oc == NULL)
+{
+return (fmt);
+}
+value = strtok(NULL, dlm);
+if (strcmp(oc, "stack") == 0)
+{
+return (0);
+}
+if (strcmp(oc, "queue") == 0)
+{
+return (1);
+}
+finder(oc, value, lnum, fmt);
+return (fmt);
+}
